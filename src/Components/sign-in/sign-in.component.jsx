@@ -49,7 +49,7 @@ class SignIn extends React.Component {
                     lable= "password"
                     value="{this.state.password}" required/>
 
-                    <CustomButton type="submit" value="Submit Form">Sign in</CustomButton>
+                    <CustomButton type="submit">Sign in</CustomButton>
                 </form>
             </div>
         )
