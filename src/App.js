@@ -18,9 +18,21 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
+  /* letting the app and the firebase be aware of the authentication state of the user without fitching the data manually*/
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      createUserProfileDocument(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((onSnapshot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
+      }
     });
   }
 
@@ -31,6 +43,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* we passing the currentUser property to header to be aware wether the
+        user is signed in or signed out.*/}
         <Header currentUser={this.state.currentUser} />
         <Switch>
           <Route exact path="/" component={HomePage} />

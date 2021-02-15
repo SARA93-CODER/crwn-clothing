@@ -18,6 +18,8 @@ const Header = ({ currentUser }) => (
       <Link className="option" to="/contact">
         CONTACT
       </Link>
+
+      {/* defult state of currentUser is true because its an object.*/}
       {currentUser ? (
         <div
           className="option"
