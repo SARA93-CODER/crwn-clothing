@@ -3,6 +3,9 @@ import "./header.styles.scss";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebse.utils";
 
+// we import the connect function that helps us to have access to the things related to redux.
+import { connect } from "react-redux";
+
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 const Header = ({ currentUser }) => (
@@ -40,4 +43,10 @@ const Header = ({ currentUser }) => (
   </div>
 );
 
-export default Header;
+//this naming cn be anything but mapStateToProps is standard with reduxcodbases.
+const mapStateToProps = (state) => ({
+  //state refers to the rootReducer (store), user=> userReducer, currentUser=> the value of currentUser in the userReducer.
+  currentUser: state.user.currentUser,
+});
+// note : we will use these tow functions (mapStateToProps + connect) in every time we need to pass the props to the components.
+export default connect(mapStateToProps)(Header);
