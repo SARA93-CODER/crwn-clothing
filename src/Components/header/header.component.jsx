@@ -11,7 +11,7 @@ import { CartDropdown } from "../cart-dropdown/cart-dropdown.component";
 
 import { CartIcon } from "../cart-icon/cart-icon.component";
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -44,14 +44,15 @@ const Header = ({ currentUser }) => (
       )}
       <CartIcon />
     </div>
-    <CartDropdown />
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 
 //this naming cn be anything but mapStateToProps is standard with reduxcodbases.
-const mapStateToProps = (state) => ({
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
   //state refers to the rootReducer (store), user=> userReducer, currentUser=> the value of currentUser in the userReducer.
-  currentUser: state.user.currentUser,
+  currentUser,
+  hidden,
 });
 // note : we will use these tow functions (mapStateToProps + connect) in every time we need to pass the props to the components.
 export default connect(mapStateToProps)(Header);
