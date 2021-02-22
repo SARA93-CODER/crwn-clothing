@@ -12,8 +12,7 @@ const addItemToCart = (cartItems, cartItemsToAdd) => {
         : cartItem
     );
   }
-  /*if there is no cartItems in there, pass them and pass the new item with
-  (cartItemToAdd). Here the quantity property will be as a reference value for the previous block as it wont run if it is a new item*/
+
   return [...cartItems, { ...cartItemsToAdd, quantity: 1 }];
 };
 
