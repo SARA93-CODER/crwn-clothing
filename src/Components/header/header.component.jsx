@@ -5,9 +5,13 @@ import { auth } from "../../firebase/firebse.utils";
 
 // we import the connect function that helps us to have access to the things related to redux.
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import { CartIcon } from "../cart-icon/cart-icon.component";
 
@@ -49,10 +53,10 @@ const Header = ({ currentUser, hidden }) => (
 );
 
 //this naming cn be anything but mapStateToProps is standard with reduxcodbases.
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+const mapStateToProps = createStructuredSelector({
   //state refers to the rootReducer (store), user=> userReducer, currentUser=> the value of currentUser in the userReducer.
-  currentUser,
-  hidden,
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 // note : we will use these tow functions (mapStateToProps + connect) in every time we need to pass the props to the components.
 export default connect(mapStateToProps)(Header);

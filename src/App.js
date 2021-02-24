@@ -7,10 +7,15 @@ import Header from "./Components/header/header.component";
 //to let the app be updated with the new action (SET_CURRENT_USER), we will use the connect func. and the mapDispatchToProps func.
 import { connect } from "react-redux";
 
+import { createStructuredSelector } from "reselect";
+
+import { selectCurrentUser } from "./redux/user/user.selectors";
+
 import { setCurrentUser } from "./redux/user/user.actions";
 
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { auth, createUserProfileDocument } from "./firebase/firebse.utils";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -46,6 +51,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/CheckoutPage" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
@@ -59,8 +65,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 /*we use mapDispatchToProps to connect our app to the store,
