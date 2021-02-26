@@ -5,7 +5,7 @@ import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { createStructuredSelector } from "reselect";
 
-import toggleCartHidden from "../../redux/cart/cart.actions";
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
 import "./cart-dropdown.styles.scss";
 import { connect } from "react-redux";
@@ -18,9 +18,7 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
       {
         //now we will show (empty cart message) if the length is 0, which means there is no cart item in there, and we'll rendering the cartitems if there is one.
         cartItems.length ? (
-          cartItems.map((CartItem) => (
-            <CartItem key={CartItem.id} item={CartItem} />
-          ))
+          cartItems.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
           <span className="empty-message">Your cart is empty</span>
         )
@@ -37,8 +35,8 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
   </div>
 );
 
-const MapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
 });
 
-export default withRouter(connect(MapStateToProps)(CartDropdown));
+export default withRouter(connect(mapStateToProps)(CartDropdown));
