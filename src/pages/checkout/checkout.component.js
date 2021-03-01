@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 //to pull some staff out of the state, we use reselect library
 import { createStructuredSelector } from "reselect";
 
+import StripeCheckoutButton from "../../Components/stripe-button/stripe-button.component";
+
 import {
   selectCartItems,
   selectCartTotal,
@@ -38,6 +40,12 @@ const CheckoutPage = (cartItems, total) => (
     <div className="total">
       <span>TOTAL: $ {total}</span>
     </div>
+    <div className="test warning">
+      *Please use the following test Credit Card for payments*
+      <br />
+      4242 4242 4242 4242 -Exp: 01/20 - CVV: 123
+    </div>
+    <StripeCheckoutButton price={total} />
   </div>
 );
 

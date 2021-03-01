@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import userReducer from "./user/user.reducer";
 import CartReducer from "./cart/cart.reducer";
 import directoryReducer from "./directory/directory.reducer";
+import shopReducer from "./shop/shop.reducer";
 
 import { persistReducer } from "redux-persist";
 //we tell the redux persist to use the locl storage as a default storage
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   cart: CartReducer,
   reducer: directoryReducer,
+  shop: shopReducer,
 });
 
 //we make a gaint reducer that contains all the small reducers that the app needs by using combineReducers func.
